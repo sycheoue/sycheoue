@@ -1,0 +1,73 @@
+using System;
+
+namespace BasicCalculator
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Basic Calculator");
+
+            while (true)
+            {
+                Console.Write("Enter first number: ");
+                if (!double.TryParse(Console.ReadLine(), out double num1))
+                {
+                    Console.WriteLine("Invalid input. Please enter a valid number.");
+                    continue;
+                }
+
+                Console.Write("Enter an operator (+, -, *, /): ");
+                string op = Console.ReadLine();
+
+                Console.Write("Enter second number: ");
+                if (!double.TryParse(Console.ReadLine(), out double num2))
+                {
+                    Console.WriteLine("Invalid input. Please enter a valid number.");
+                    continue;
+                }
+
+                double result;
+
+                switch (op)
+                {
+                    case "+":
+                        result = num1 + num2;
+                        break;
+
+                    case "-":
+                        result = num1 - num2;
+                        break;
+
+                    case "*":
+                        result = num1 * num2;
+                        break;
+
+                    case "/":
+                        if (num2 == 0)
+                        {
+                            Console.WriteLine("Error: Division by zero is not allowed.");
+                            continue;
+                        }
+                        result = num1 / num2;
+                        break;
+
+                    default:
+                        Console.WriteLine("Invalid operator. Please use +, -, *, or /.");
+                        continue;
+                }
+
+                Console.WriteLine($"Result: {result}");
+
+                Console.Write("Do you want to perform another calculation? (y/n): ");
+                string again = Console.ReadLine().ToLower();
+                if (again != "y")
+                {
+                    break;
+                }
+            }
+
+            Console.WriteLine("Thank you for using the calculator!");
+        }
+    }
+}
